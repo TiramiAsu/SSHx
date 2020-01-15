@@ -35,6 +35,9 @@ public class _Lotto {
 		Lotto lottoProperty = (Lotto) context.getBean("lotto_property");
 		lottoProperty.print();
 		
+		Lotto lottoInit = (Lotto) context.getBean("lotto_init");
+		lottoInit.print();
+		
 	}
 	
 }

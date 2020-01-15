@@ -24,7 +24,13 @@ public class LottoImpl implements Lotto {
 	
 	private int count;
 	
-	public LottoImpl() {}
+	private void init() {
+		count = 10;
+	}
+	
+	public LottoImpl() {
+		init();
+	}
 	
 	public LottoImpl(int count) {
 		this.count = count;

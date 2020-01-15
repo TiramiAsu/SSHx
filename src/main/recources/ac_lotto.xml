@@ -30,4 +30,7 @@
 		<property name="count" value="5" />
 	</bean>
 
+	<!-- 設定建構後, 執行初始化方法 -->
+	<bean id="lotto_init" class="com.sshx.c01_lotto.LottoImpl" init-method="init" />
+
 </beans>
