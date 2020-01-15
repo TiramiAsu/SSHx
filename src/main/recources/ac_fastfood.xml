@@ -12,10 +12,18 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<!-- 設定實體位置 -->
-	<bean id="helloSpring" class="com.sshx.c01_hello.HelloImpl" />
-	
-	<import resource="ac_lotto.xml"/>
-	<import resource="ac_fastfood.xml"/>
+	<!-- fastfood-集合注入 -->
+
+	<!-- Set 集合注入 -->
+	<bean id="fastfood_set"
+		class="com.sshx.c01_fastfood.FastfoodImpl">
+		<constructor-arg name="foodSet">
+			<set>
+				<value>apple</value>
+				<value>lemon</value>
+				<value>banana</value>
+			</set>
+		</constructor-arg>
+	</bean>
 
 </beans>
