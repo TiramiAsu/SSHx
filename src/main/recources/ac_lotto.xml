@@ -12,9 +12,11 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<!-- 設定實體位置 -->
-	<bean id="helloSpring" class="com.sshx.c01_hello.HelloImpl" />
-	
-	<import resource="ac_lotto.xml"/>
+	<!-- lotto-設定不同建構參數 -->
+
+	<!-- 使用建構子傳入參數的 name 設定值 -->
+	<bean id="lotto_name" class="com.sshx.c01_lotto.LottoImpl">
+		<constructor-arg name="count" value="3" />
+	</bean>
 
 </beans>
