@@ -26,4 +26,16 @@
 		</constructor-arg>
 	</bean>
 
+	<!-- List 集合注入 -->
+	<bean id="fastfood_list"
+		class="com.sshx.c01_fastfood.FastfoodImpl">
+		<constructor-arg name="drinkList">
+			<list>
+				<value>soda</value>
+				<value>spirit</value>
+				<value>cola</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
 </beans>

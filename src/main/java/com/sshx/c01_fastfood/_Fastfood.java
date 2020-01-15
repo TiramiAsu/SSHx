@@ -29,6 +29,11 @@ public class _Fastfood {
 		Fastfood ff_set = (Fastfood) context.getBean("fastfood_set");
 		ff_set.print();
 		
+		System.out.println();
+		
+		Fastfood ff_list = (Fastfood) context.getBean("fastfood_list");
+		ff_list.print();
+		
 	}
 	
 }
