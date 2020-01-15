@@ -49,4 +49,29 @@
 		</constructor-arg>
 	</bean>
 
+	<!-- 注入多個集合 -->
+	<bean id="fastfood_collection"
+		class="com.sshx.c01_fastfood.FastfoodImpl">
+		<constructor-arg name="foodSet">
+			<set>
+				<value>apple</value>
+				<value>lemon</value>
+				<value>banna</value>
+			</set>
+		</constructor-arg>
+		<constructor-arg name="drinkList">
+			<list>
+				<value>soda</value>
+				<value>spirit</value>
+				<value>cola</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg name="packageMap">
+			<map>
+				<entry key="A" value="pkgApple" />
+				<entry key="B" value="pkgBanana" />
+			</map>
+		</constructor-arg>
+	</bean>
+
 </beans>

@@ -41,6 +41,12 @@ public class FastfoodImpl implements Fastfood {
 		this.packageMap = packageMap;
 	}
 
+	public FastfoodImpl(Set foodSet, List drinkList, Map packageMap) {
+		this.foodSet = foodSet;
+		this.drinkList = drinkList;
+		this.packageMap = packageMap;
+	}
+
 	@Override
 	public void print() {
 		System.out.println(foodSet);
