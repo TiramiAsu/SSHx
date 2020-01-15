@@ -18,5 +18,11 @@
 	<bean id="lotto_name" class="com.sshx.c01_lotto.LottoImpl">
 		<constructor-arg name="count" value="3" />
 	</bean>
+	
+	<!-- 使用建構子傳入參數的 index 設定值 -->
+	<bean id="lotto_index" class="com.sshx.c01_lotto.LottoImpl">
+		<constructor-arg index="0" value="2" />
+		<constructor-arg index="1" value="3" />
+	</bean>
 
 </beans>

@@ -30,6 +30,10 @@ public class LottoImpl implements Lotto {
 		this.count = count;
 	}
 	
+	public LottoImpl(int a, int b) {
+		this.count = (int) Math.pow(a, b);
+	}
+	
 	@Override
 	public void print() {
 		Set<Integer> nums = new LinkedHashSet<>();
