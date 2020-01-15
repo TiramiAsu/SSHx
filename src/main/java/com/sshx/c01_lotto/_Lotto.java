@@ -32,6 +32,9 @@ public class _Lotto {
 		Lotto lottoIndex = (Lotto) context.getBean("lotto_index");
 		lottoIndex.print();
 		
+		Lotto lottoProperty = (Lotto) context.getBean("lotto_property");
+		lottoProperty.print();
+		
 	}
 	
 }

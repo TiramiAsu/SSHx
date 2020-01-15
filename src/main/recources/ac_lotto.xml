@@ -25,4 +25,9 @@
 		<constructor-arg index="1" value="3" />
 	</bean>
 
+	<!-- 直接設定屬性值 -->
+	<bean id="lotto_property" class="com.sshx.c01_lotto.LottoImpl">
+		<property name="count" value="5" />
+	</bean>
+
 </beans>
