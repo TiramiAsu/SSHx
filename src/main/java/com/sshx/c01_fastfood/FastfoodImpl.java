@@ -10,6 +10,7 @@
 package com.sshx.c01_fastfood;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -24,6 +25,7 @@ public class FastfoodImpl implements Fastfood {
 
 	private Set foodSet;
 	private List drinkList;
+	private Map packageMap;
 	
 	public FastfoodImpl() {}
 	
@@ -34,11 +36,16 @@ public class FastfoodImpl implements Fastfood {
 	public FastfoodImpl(List drinkList) {
 		this.drinkList = drinkList;
 	}
+	
+	public FastfoodImpl(Map packageMap) {
+		this.packageMap = packageMap;
+	}
 
 	@Override
 	public void print() {
 		System.out.println(foodSet);
 		System.out.println(drinkList);
+		System.out.println(packageMap);
 		System.out.println();
 	}
 

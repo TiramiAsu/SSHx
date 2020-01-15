@@ -38,4 +38,15 @@
 		</constructor-arg>
 	</bean>
 
+	<!-- Map 集合注入 -->
+	<bean id="fastfood_map"
+		class="com.sshx.c01_fastfood.FastfoodImpl">
+		<constructor-arg name="packageMap">
+			<map>
+				<entry key="A" value="pkgApple" />
+				<entry key="B" value="pkgBanana" />
+			</map>
+		</constructor-arg>
+	</bean>
+
 </beans>
