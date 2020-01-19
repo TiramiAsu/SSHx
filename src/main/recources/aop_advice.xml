@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- AOP: 切面 -->
+
+	<!-- Target: 目標物件 -->
+	<bean id="userService" class="com.sshx.c02_aop.UserServiceImpl" />
+
+	<!-- Advice 通知物件, 也是 Aspect 的具體作為 -->
+	<bean id="trasactionAdvice" class="com.sshx.c02_aop.TransactionAdvice" />
+
+	<!-- 將通知物件植入目標物件 -->
+	<aop:config>
+		<!-- 切入點 -->
+		<aop:pointcut id="pointcut" expression="execution(* com.sshx.c02_aop.UserServiceImpl.* (..))" />
+		<!-- 設定切面 -->
+		<aop:aspect ref="trasactionAdvice">
+			<aop:before method="before" pointcut-ref="pointcut" />
+			<aop:after method="after" pointcut-ref="pointcut" />
+			<aop:after-returning method="afterReturning" pointcut-ref="pointcut" />
+			<aop:after-throwing method="afterThrowing" pointcut-ref="pointcut" />
+			<aop:around method="around" pointcut-ref="pointcut"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>
