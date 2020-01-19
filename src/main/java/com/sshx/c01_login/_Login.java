@@ -29,6 +29,12 @@ public class _Login {
 		Login login_ref = (Login) context.getBean("login_ref");
 		System.out.println(login_ref.verify("admin", "1234"));
 		
+		Login login_byType = context.getBean("login_byType", Login.class);
+		System.out.println(login_byType.verify("admin", "1234"));
+		
+		Login login_byName = context.getBean("login_byType", Login.class);
+		System.out.println(login_byName.verify("admin", "1234"));
+		
 	}
 	
 }

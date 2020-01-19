@@ -21,4 +21,11 @@
 		<property name="userDAO" ref="userDAO" />
 	</bean>
 
+	<!-- 使用 autowire(自動裝配) byType -->
+	<bean id="login_byType" class="com.sshx.c01_login.LoginImpl" autowire="byType" />
+	
+	<!-- 使用 autowire(自動裝配) byName -->
+	<bean id="login_byName" class="com.sshx.c01_login.LoginImpl" autowire="byName" />
+
+
 </beans>
