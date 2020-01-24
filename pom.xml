@@ -91,6 +91,20 @@
 			<version>1.0</version>
 		</dependency>
 
+		<!-- 連線池 -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.4</version>
+		</dependency>
+
+		<!-- PostgreSQL -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.2.jre7</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
