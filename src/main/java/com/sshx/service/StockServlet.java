@@ -57,6 +57,9 @@ public class StockServlet extends HttpServlet {
 			case "add":
 				add(req, resp);
 				break;
+			case "remove":
+				remove(req, resp);
+				break;
 			case "search":
 				search(req, resp);
 				break;
@@ -102,6 +105,14 @@ public class StockServlet extends HttpServlet {
 			System.err.println(">>> Search Error: " + e.getMessage() + " <<<");
 		}
 		req.getRequestDispatcher("./WEB-INF/jsp/Stock.jsp").forward(req, resp);
+	}
+
+	public void remove(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			Long id = Long.parseLong(req.getParameter("id"));
+				Stock stock = stockDAO.find(id, Stock.class);
+					stockDAO.delete(id, stock);
+					req.setAttribute("msg", "\"" + stock.getName() + "\" remove Success!!");
+		search(req, resp);
 	}
 
 	@Override

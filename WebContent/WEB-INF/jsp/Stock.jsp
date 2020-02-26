@@ -39,11 +39,25 @@
 					<td>${ stock.getName() }</td>
 					<td>
 						<button type="button" class="btn btn-outline-primary">Edit</button>
-						<button type="button" class="btn btn-outline-danger">Remove</button>
+						<button type="button" class="btn btn-outline-danger"
+							onclick="doRemove('${ stock.getId()}')">Remove</button>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<script>
+		// 頁面載入完, 執行方法檢查是否有資訊
+		window.onload = function () {
+			if ('${ msg }' !== '') {
+				alert('${ msg }')
+			}
+		}
+		function doRemove (id) {
+			if (confirm('是否要刪除 id ' + id)) {
+				window.location.href = './stock?action=remove&id=' + id
+			}
+		}
+	</script>
 </body>
 </html>
