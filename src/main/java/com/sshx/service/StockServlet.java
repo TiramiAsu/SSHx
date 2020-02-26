@@ -46,21 +46,28 @@ public class StockServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 
-		String action = req.getParameter("action");
-		if (action.equals("search")) {
+		try {
+			String action = req.getParameter("action");
+			if (action.equals("search")) {
+				search(req, resp);
+			}
+		} catch (Exception e) {
+			// action is null
 			search(req, resp);
-		} else {
-			System.out.println("Error");
 		}
 	}
 
 	public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Stock> stockList;
-		stockList = stockDAO.query(Stock.class).stream()
-				.sorted((o1, o2) -> o2.getId().compareTo(o1.getId()))
-				.collect(Collectors.toList());
-		req.setAttribute("stockList", stockList);
-		req.setAttribute("msg", "Search results totally " + stockList.size() + " records.");
+		try {
+			stockList = stockDAO.query(Stock.class).stream()
+					.sorted((o1, o2) -> o2.getId().compareTo(o1.getId()))
+					.collect(Collectors.toList());
+			req.setAttribute("stockList", stockList);
+			req.setAttribute("msg", "Search results totally " + stockList.size() + " records.");
+		} catch (Exception e) {
+			System.err.println(">>> Search Error: " + e.getMessage() + " <<<");
+		}
 		req.getRequestDispatcher("./WEB-INF/jsp/Stock.jsp").forward(req, resp);
 	}
 
