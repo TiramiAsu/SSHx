@@ -9,6 +9,7 @@
  */
 package com.sshx.service;
 
+import static com.sshx.utils.JudgeUtils.isNotNull;
 import static com.sshx.utils.JudgeUtils.isNotNullOrEmptyString;
 
 import java.io.IOException;
@@ -108,10 +109,24 @@ public class StockServlet extends HttpServlet {
 	}
 
 	public void remove(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
 			Long id = Long.parseLong(req.getParameter("id"));
+
+			if (isNotNullOrEmptyString(id)) {
 				Stock stock = stockDAO.find(id, Stock.class);
+				if (isNotNull(id, stock)) {
 					stockDAO.delete(id, stock);
 					req.setAttribute("msg", "\"" + stock.getName() + "\" remove Success!!");
+				} else {
+					throw new Exception(">>> Not Found Stock by ID: " + id + " <<<");
+				}
+			} else {
+				throw new Exception(">>> id is Null <<<");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("msg", "Failed to remove Stock, Please try again.");
+		}
 		search(req, resp);
 	}
 
