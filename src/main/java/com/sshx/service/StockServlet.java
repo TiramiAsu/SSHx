@@ -152,12 +152,15 @@ public class StockServlet extends HttpServlet {
 			stockList = stockDAO.query(Stock.class).stream()
 					.sorted((o1, o2) -> o2.getId().compareTo(o1.getId()))
 					.collect(Collectors.toList());
+			req.setAttribute("msg",
+					req.getAttribute("msg") != null ? req.getAttribute("msg") :
+					"Search results totally " + stockList.size() + " records.");
 			} else {
 				stockList = Arrays.asList(stockDAO.find(code));
 				req.setAttribute("code", code);
+				req.setAttribute("msg", "Search " + code + " Success.");
 			}
 			req.setAttribute("stockList", stockList);
-			req.setAttribute("msg", "Search results totally " + stockList.size() + " records.");
 		} catch (Exception e) {
 			System.err.println(">>> Search Error: " + e.getMessage() + " <<<");
 		}
