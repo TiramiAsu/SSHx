@@ -25,7 +25,8 @@
 				</th>
 				<th></th>
 				<th>
-					<button type="button" class="btn btn-primary">Add</button>
+					<button type="button" class="btn btn-primary"
+						onclick="location.href='./stock?action=uiAdd'">Add</button>
 					<button type="button" class="btn btn-outline-info">Search</button>
 				</th>
 			</tr>

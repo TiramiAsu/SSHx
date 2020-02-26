@@ -48,13 +48,22 @@ public class StockServlet extends HttpServlet {
 
 		try {
 			String action = req.getParameter("action");
-			if (action.equals("search")) {
+			switch (action) {
+			case "uiAdd": // button add
+				uiAdd(req, resp);
+				break;
+			case "search":
 				search(req, resp);
+				break;
 			}
 		} catch (Exception e) {
 			// action is null
 			search(req, resp);
 		}
+	}
+
+	public void uiAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("./WEB-INF/jsp/StockAdd.jsp").forward(req, resp);
 	}
 
 	public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
