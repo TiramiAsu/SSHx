@@ -72,11 +72,21 @@ public class StockServlet extends HttpServlet {
 	}
 
 	public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
 			String code = req.getParameter("code");
 			String name = req.getParameter("name");
+
+			if (isNotNullOrEmptyString(code, name)) {
 				Stock stock = new Stock(code, name);
 				stockDAO.create(stock);
 				req.setAttribute("msg", "\"" + stock.getName() + "\" add Success!!");
+			} else {
+				throw new Exception(">>> Some attribute is Null <<<");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("msg", "Failed to add Stock, Please try again.");
+		}
 		search(req, resp);
 	}
 
