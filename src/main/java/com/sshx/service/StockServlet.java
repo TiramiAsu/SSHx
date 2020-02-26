@@ -114,7 +114,7 @@ public class StockServlet extends HttpServlet {
 			e.printStackTrace();
 			req.setAttribute("msg", "Failed to add Stock, Please try again.");
 		}
-		search(req, resp);
+		resp.sendRedirect("/SSHx/stock");
 	}
 
 	public void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -140,21 +140,20 @@ public class StockServlet extends HttpServlet {
 			e.printStackTrace();
 			req.setAttribute("msg", "Failed to edit Stock, Please try again.");
 		}
-		search(req, resp);
+		resp.sendRedirect("/SSHx/stock");
 	}
 
 	public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Stock> stockList;
-		String code;
 		try {
-			code = req.getParameter("code") == null ? "" : req.getParameter("code");
+			String code = req.getParameter("code") == null ? "" : req.getParameter("code");
 			if (code.equals("")) {
-			stockList = stockDAO.query(Stock.class).stream()
-					.sorted((o1, o2) -> o2.getId().compareTo(o1.getId()))
-					.collect(Collectors.toList());
-			req.setAttribute("msg",
-					req.getAttribute("msg") != null ? req.getAttribute("msg") :
-					"Search results totally " + stockList.size() + " records.");
+				stockList = stockDAO.query(Stock.class).stream()
+						.sorted((o1, o2) -> o2.getId().compareTo(o1.getId()))
+						.collect(Collectors.toList());
+				req.setAttribute("msg",
+						req.getAttribute("msg") != null ? req.getAttribute("msg") :
+						"Search results totally " + stockList.size() + " records.");
 			} else {
 				stockList = Arrays.asList(stockDAO.find(code));
 				req.setAttribute("code", code);
