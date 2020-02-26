@@ -33,16 +33,15 @@ public class _StockCRUD {
 	public static void main(String[] args) {
 //		create(new Stock("3008", "大立光"));
 //		create(new Stock("2330", "台雞電"));
-//		query();
-		find("2330");
-		find(1L);
 //		update(2L, new Stock("2330", "台積電"));
 //		delete(1L);
+		query();
+//		find("2330");
+//		find(1L);
 	}
 	
 	public static void create(Stock stock) {
 		stockDAO.create(stock);
-		query();
 	}
 	
 	public static List<Stock> query() {
@@ -67,12 +66,10 @@ public class _StockCRUD {
 	public static void update(Long id, Stock stock) {
 		stock.setId(id);
 		stockDAO.update(id, stock);
-		query();
 	}
 	
 	public static void delete(Long id) {
 		stockDAO.delete(id, stockDAO.find(id, Stock.class));
-		query();
 	}
 
 }
