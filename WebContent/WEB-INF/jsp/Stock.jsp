@@ -21,7 +21,7 @@
 			<tr>
 				<th></th>
 				<th>
-					<input type="text" class="form-control" name="code">
+					<input type="text" class="form-control" name="code" value="${ code }">
 				</th>
 				<th></th>
 				<th>
