@@ -79,10 +79,19 @@ public class StockServlet extends HttpServlet {
 	}
 
 	public void uiEdit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
 			Long id = Long.parseLong(req.getParameter("id"));
+			if (isNotNull(id)) {
 				Stock stock = stockDAO.find(id, Stock.class);
 				req.setAttribute("stock", stock);
+			} else {
+				throw new Exception(">>> id is Null <<<");
+			}
 			req.getRequestDispatcher("./WEB-INF/jsp/StockAdd.jsp").forward(req, resp);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.sendRedirect("./WEB-INF/jsp/Stock.jsp");
+		}
 	}
 
 	public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
