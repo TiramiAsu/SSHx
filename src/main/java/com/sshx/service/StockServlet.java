@@ -9,6 +9,8 @@
  */
 package com.sshx.service;
 
+import static com.sshx.utils.JudgeUtils.isNotNullOrEmptyString;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,6 +54,9 @@ public class StockServlet extends HttpServlet {
 			case "uiAdd": // button add
 				uiAdd(req, resp);
 				break;
+			case "add":
+				add(req, resp);
+				break;
 			case "search":
 				search(req, resp);
 				break;
@@ -64,6 +69,15 @@ public class StockServlet extends HttpServlet {
 
 	public void uiAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("./WEB-INF/jsp/StockAdd.jsp").forward(req, resp);
+	}
+
+	public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String code = req.getParameter("code");
+			String name = req.getParameter("name");
+				Stock stock = new Stock(code, name);
+				stockDAO.create(stock);
+				req.setAttribute("msg", "\"" + stock.getName() + "\" add Success!!");
+		search(req, resp);
 	}
 
 	public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
