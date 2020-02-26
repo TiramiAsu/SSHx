@@ -13,6 +13,7 @@ import static com.sshx.utils.JudgeUtils.isNotNull;
 import static com.sshx.utils.JudgeUtils.isNotNullOrEmptyString;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,7 @@ public class StockServlet extends HttpServlet {
 		stockDAO = SpringUtils.getBean(StockDAO.class);
 	}
 
-	public void doHandle (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void doHandle(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// TODO 之後改用 Filter
 		req.setCharacterEncoding("UTF-8");
@@ -144,10 +145,17 @@ public class StockServlet extends HttpServlet {
 
 	public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Stock> stockList;
+		String code;
 		try {
+			code = req.getParameter("code") == null ? "" : req.getParameter("code");
+			if (code.equals("")) {
 			stockList = stockDAO.query(Stock.class).stream()
 					.sorted((o1, o2) -> o2.getId().compareTo(o1.getId()))
 					.collect(Collectors.toList());
+			} else {
+				stockList = Arrays.asList(stockDAO.find(code));
+				req.setAttribute("code", code);
+			}
 			req.setAttribute("stockList", stockList);
 			req.setAttribute("msg", "Search results totally " + stockList.size() + " records.");
 		} catch (Exception e) {

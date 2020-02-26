@@ -27,7 +27,8 @@
 				<th>
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='./stock?action=uiAdd'">Add</button>
-					<button type="button" class="btn btn-outline-info">Search</button>
+					<button type="button" class="btn btn-outline-info"
+						onclick="doSearch()">Search</button>
 				</th>
 			</tr>
 		</thead>
@@ -48,15 +49,26 @@
 		</tbody>
 	</table>
 	<script>
+		/*
 		// 頁面載入完, 執行方法檢查是否有資訊
 		window.onload = function () {
 			if ('${ msg }' !== '') {
 				alert('${ msg }')
 			}
 		}
+		*/
 		function doRemove (id) {
 			if (confirm('是否要刪除 id ' + id)) {
 				window.location.href = './stock?action=remove&id=' + id
+			}
+		}
+		function doSearch () {
+			var code = document.getElementsByName('code')
+			// console.log('Code: ' + code)
+			if (code !== '') {
+				window.location.href = './stock?action=search&code=' + code[0].value
+			} else {
+				window.location.href = './stock?action=search'
 			}
 		}
 	</script>
