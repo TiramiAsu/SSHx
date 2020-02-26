@@ -38,7 +38,8 @@
 					<td>${ stock.getCode() }</td>
 					<td>${ stock.getName() }</td>
 					<td>
-						<button type="button" class="btn btn-outline-primary">Edit</button>
+						<button type="button" class="btn btn-outline-primary"
+							onclick="location.href='./stock?action=uiEdit&id=' + '${ stock.getId() }'">Edit</button>
 						<button type="button" class="btn btn-outline-danger"
 							onclick="doRemove('${ stock.getId()}')">Remove</button>
 					</td>

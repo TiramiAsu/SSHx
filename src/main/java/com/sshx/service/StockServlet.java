@@ -52,8 +52,11 @@ public class StockServlet extends HttpServlet {
 		try {
 			String action = req.getParameter("action");
 			switch (action) {
-			case "uiAdd": // button add
+			case "uiAdd": // button [Add]
 				uiAdd(req, resp);
+				break;
+			case "uiEdit": // button [Edit]
+				uiEdit(req, resp);
 				break;
 			case "add":
 				add(req, resp);
@@ -73,6 +76,13 @@ public class StockServlet extends HttpServlet {
 
 	public void uiAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("./WEB-INF/jsp/StockAdd.jsp").forward(req, resp);
+	}
+
+	public void uiEdit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			Long id = Long.parseLong(req.getParameter("id"));
+				Stock stock = stockDAO.find(id, Stock.class);
+				req.setAttribute("stock", stock);
+			req.getRequestDispatcher("./WEB-INF/jsp/StockAdd.jsp").forward(req, resp);
 	}
 
 	public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
