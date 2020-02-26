@@ -11,7 +11,8 @@
 	<h1>stock</h1>
 	<h3 style="color: darkgray">[Info] ${ param.action == 'uiAdd' ? 'Add' : 'Edit' } Stock...</h3>
 	<form method="post" action="./stock">
-		<input type="hidden" name="action" value="add">
+		<input type="hidden" name="action" value="${ param.action == 'uiAdd' ? 'add' : 'edit' }">
+		<input type="hidden" name="id" value="${ stock.getId() }"> <!-- 設定在 request parameter 中 -->
 		<div class="form-group">
 			<label>Id</label>
 			<input type="text" class="form-control" name="id" placeholder="default" disabled

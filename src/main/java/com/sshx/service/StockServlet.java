@@ -61,6 +61,9 @@ public class StockServlet extends HttpServlet {
 			case "add":
 				add(req, resp);
 				break;
+			case "edit":
+				edit(req, resp);
+				break;
 			case "remove":
 				remove(req, resp);
 				break;
@@ -110,6 +113,19 @@ public class StockServlet extends HttpServlet {
 			e.printStackTrace();
 			req.setAttribute("msg", "Failed to add Stock, Please try again.");
 		}
+		search(req, resp);
+	}
+
+	public void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			Long id = Long.parseLong(req.getParameter("id")); // 取得 hidden 中設定的 id 值
+			String code = req.getParameter("code");
+			String name = req.getParameter("name");
+				Stock stock = stockDAO.find(id, Stock.class);
+					stock.setCode(code);
+					stock.setName(name);
+					stockDAO.update(id, stock);
+					req.setAttribute("msg", "\"" + stock.getName() + "\" edit Success!!");
+			req.setAttribute("msg", "Failed to edit Stock, Please try again.");
 		search(req, resp);
 	}
 
