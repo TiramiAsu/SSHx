@@ -117,15 +117,28 @@ public class StockServlet extends HttpServlet {
 	}
 
 	public void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
 			Long id = Long.parseLong(req.getParameter("id")); // 取得 hidden 中設定的 id 值
 			String code = req.getParameter("code");
 			String name = req.getParameter("name");
+
+			if (isNotNullOrEmptyString(id, name)) {
 				Stock stock = stockDAO.find(id, Stock.class);
+				if (isNotNull(stock)) {
 					stock.setCode(code);
 					stock.setName(name);
 					stockDAO.update(id, stock);
 					req.setAttribute("msg", "\"" + stock.getName() + "\" edit Success!!");
+				} else {
+					throw new Exception(">>> Not Found Stock by ID: " + id + " <<<");
+				}
+			} else {
+				throw new Exception(">>> Some attribute is Null <<<");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 			req.setAttribute("msg", "Failed to edit Stock, Please try again.");
+		}
 		search(req, resp);
 	}
 
