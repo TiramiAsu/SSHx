@@ -92,6 +92,10 @@ public class FundServlet extends HttpServlet {
 			if (isNotNull(id)) {
 				Fund fund = fundDAO.find(id, Fund.class);
 				req.setAttribute("fund", fund);
+				req.setAttribute("stockList",
+						stockDAO.query(Stock.class)
+							.stream()
+							.collect(Collectors.toMap(Stock::getCode, Stock::getName)));
 			} else {
 				throw new Exception(">>> id is Null <<<");
 			}

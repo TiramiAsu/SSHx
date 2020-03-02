@@ -29,6 +29,10 @@
 			<input type="text" class="form-control" name="desc" placeholder="Desc"
 					value="${ param.action == 'uiAdd' ? '' : fund.getDesc() }">
 		</div>
+		<div class="form-group">
+			<label>Stocks</label>
+			<div id="vueTransfer"></div>
+		</div>
 		<button type="button" class="btn btn-outline-dark" onclick="doCancel()">Cancel</button>
 		<button type="submit" class="btn btn-primary" onclick="return doConfirm()">
 			${ param.action == 'uiAdd' ? 'Finish' : 'Update' }</button>
@@ -46,9 +50,11 @@
 			}
 		}
 	</script>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/element-ui@2.4.0/lib/index.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/element-ui@2.4.0/lib/umd/locale/zh-TW.js"></script>
 	<script>
+		var stocks = '${ stockList }'
 		var template = `
 			<div>
 				<el-transfer
@@ -59,6 +65,16 @@
 				</el-transfer>
 			</div>
 		`
+		new Vue({
+			el: '#vueTransfer',
+			template,
+			data: {
+				stockList: [],
+				chooseStocks: []
+			},
+			methods: {
+			}
+		})
 	</script>
 </body>
 </html>
