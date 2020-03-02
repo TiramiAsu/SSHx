@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Fund ${ param.action == 'uiAdd' ? 'Add' : 'Edit' }</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
 </head>
 <body style="padding: 20px 10%">
 	<h1>fund</h1>
@@ -44,6 +45,20 @@
 				window.location.href = './stock?action=search'
 			}
 		}
+	</script>
+	<script type="text/javascript" src="https://unpkg.com/element-ui@2.4.0/lib/index.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/element-ui@2.4.0/lib/umd/locale/zh-TW.js"></script>
+	<script>
+		var template = `
+			<div>
+				<el-transfer
+					:titles="['可選擇', '已選擇']"
+					filterable
+					filter-placeholder="請輸入股票名稱"
+					:data="stockList">
+				</el-transfer>
+			</div>
+		`
 	</script>
 </body>
 </html>
