@@ -159,7 +159,11 @@ public class StockServlet extends HttpServlet {
 				req.setAttribute("code", code);
 				req.setAttribute("msg", "Search " + code + " Success.");
 			}
-			req.setAttribute("stockList", stockList);
+			if (stockList.get(0) != null) {
+				req.setAttribute("stockList", stockList);
+			} else {
+				req.setAttribute("stockList", null);
+			}
 		} catch (Exception e) {
 			System.err.println(">>> Search Error: " + e.getMessage() + " <<<");
 		}

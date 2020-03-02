@@ -33,6 +33,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		<c:if test="${stockList != null}">
 			<c:forEach var="stock" items="${ stockList }">
 				<tr>
 					<td>${ stock.getId() }</td>
@@ -46,6 +47,14 @@
 					</td>
 				</tr>
 			</c:forEach>
+		</c:if>
+		<c:if test="${stockList == null}">
+			<tr class="text-center">
+				<td colspan="4">
+					<h3>~查無資料 ~</h3>
+				</td>
+			</tr>
+		</c:if>
 		</tbody>
 	</table>
 	<script>
