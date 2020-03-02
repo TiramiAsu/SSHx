@@ -61,7 +61,11 @@
 					:titles="['可選擇', '已選擇']"
 					filterable
 					filter-placeholder="請輸入股票名稱"
-					:data="stockList">
+					:data="stockList"
+					:props="{
+						key: 'item'
+					}"
+					v-model="chooseStocks">
 				</el-transfer>
 			</div>
 		`
@@ -72,7 +76,25 @@
 				stockList: [],
 				chooseStocks: []
 			},
+			mounted() {
+				this.getStockList(stocks)
+			},
+			updated() {
+				console.log('choose stocks: ' + this.chooseStocks)
+			},
 			methods: {
+				getStockList(stocks) {
+					console.log('get it: ' + stocks)                  // {3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電}
+					var data = stocks.substring(1, stocks.length - 1) // 3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電             -> 去除 '{', '}'
+					var arr = data.split(', ')                        // ["3008=大立光", "1301=台塑", "1201=味全", "2454=聯發科", "2330=台積電"] -> 切分成陣列
+					arr.forEach(s => {
+						this.stockList.push({
+							key: s.split('=')[0],
+							value: s.split('=')[1],
+							item: s.split('=')[0] + '-' + s.split('=')[1]
+						})
+					})
+				}
 			}
 		})
 	</script>
