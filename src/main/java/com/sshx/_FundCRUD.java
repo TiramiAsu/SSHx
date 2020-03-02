@@ -37,18 +37,18 @@ public class _FundCRUD {
 	public static void main(String[] args) {
 //		create(new Fund("高收益", "錢多多"));
 //		create(new Fund("高科技", "有前途"));
+//		update(1L, new Fund("高收益", "基本利息 1.2%"));
+//		delete(1L);
+
+//		addStock("高科技", "2330", "3008");
+
 		query();
 //		find(2L);
 //		find("高收益");
-//		update(1L, new Fund("高收益", "基本利息 1.2%"));
-//		delete(1L);
-		
-		addStock("高科技", "2330", "3008");
 	}
 	
 	public static void create(Fund fund) {
 		fundDAO.create(fund);
-		query();
 	}
 	
 	public static List<Fund> query() {
