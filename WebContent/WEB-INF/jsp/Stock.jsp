@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body style="padding: 20px 10%">
+	<jsp:include page="./list.jsp"></jsp:include>
 	<h1>stock</h1>
 	<h3 style="color: darkgray">[Info] ${ msg }</h3>
 	<table class="table">
