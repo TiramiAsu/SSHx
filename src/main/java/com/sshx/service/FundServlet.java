@@ -14,7 +14,9 @@ import static com.sshx.utils.JudgeUtils.isNotNullOrEmptyString;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -83,6 +85,11 @@ public class FundServlet extends HttpServlet {
 	}
 
 	public void uiAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		req.setAttribute("stockList",
+				stockDAO.query(Stock.class)
+					.stream()
+					.collect(Collectors.toMap(Stock::getCode, Stock::getName)));
 		req.getRequestDispatcher("./WEB-INF/jsp/FundAdd.jsp").forward(req, resp);
 	}
 
@@ -110,9 +117,10 @@ public class FundServlet extends HttpServlet {
 		try {
 			String name = req.getParameter("name");
 			String desc = req.getParameter("desc");
+			String[] stockIds = req.getParameter("stockIds").split(","); // 3008,1301
 
 			if (isNotNullOrEmptyString(name, desc)) {
-				Fund fund = new Fund(name, desc);
+				Fund fund = new Fund(name, desc, getStocks(stockIds));
 				fundDAO.create(fund);
 				req.setAttribute("msg", "\"" + fund.getName() + "\" add Success!!");
 			} else {
@@ -130,12 +138,14 @@ public class FundServlet extends HttpServlet {
 			Long id = Long.parseLong(req.getParameter("id")); // 取得 hidden 中設定的 id 值
 			String name = req.getParameter("name");
 			String desc = req.getParameter("desc");
+			String[] stockIds = req.getParameter("stockIds").split(","); // 3008,1301
 
 			if (isNotNullOrEmptyString(id, name)) {
 				Fund fund = fundDAO.find(id, Fund.class);
 				if (isNotNull(fund)) {
 					fund.setName(name);
 					fund.setDesc(desc);
+					fund.setStocks(getStocks(stockIds));
 					fundDAO.update(id, fund);
 					req.setAttribute("msg", "\"" + fund.getName() + "\" edit Success!!");
 				} else {
@@ -208,6 +218,17 @@ public class FundServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doHandle(req, resp);
+	}
+
+	private Set<Stock> getStocks(String[] stockIds) {
+		Set<Stock> stocks = new HashSet<>();
+		for (int i = 0; i < stockIds.length; i++) {
+			Stock stock = stockDAO.find(stockIds[i]);
+			if (isNotNull(stock)) {
+				stocks.add(stock);
+			}
+		}
+		return stocks;
 	}
 
 }

@@ -67,6 +67,7 @@
 					}"
 					v-model="chooseStocks">
 				</el-transfer>
+				<input type="hidden" name="stockIds" v-model="getStockIdList()">
 			</div>
 		`
 		new Vue({
@@ -84,7 +85,7 @@
 			},
 			methods: {
 				getStockList(stocks) {
-					console.log('get it: ' + stocks)                  // {3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電}
+					// console.log('get it: ' + stocks)                  // {3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電}
 					var data = stocks.substring(1, stocks.length - 1) // 3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電             -> 去除 '{', '}'
 					var arr = data.split(', ')                        // ["3008=大立光", "1301=台塑", "1201=味全", "2454=聯發科", "2330=台積電"] -> 切分成陣列
 					arr.forEach(s => {
@@ -94,6 +95,14 @@
 							item: s.split('=')[0] + '-' + s.split('=')[1]
 						})
 					})
+				},
+				getStockIdList() {
+					var self = this
+					var stockIds = []
+					self.chooseStocks.forEach(s => {
+						stockIds.push(s.split('-')[0])
+					})
+					return stockIds
 				}
 			}
 		})
