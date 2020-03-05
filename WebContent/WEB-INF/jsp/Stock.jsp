@@ -16,6 +16,7 @@
 				<th>ID</th>
 				<th>Code</th>
 				<th>Name</th>
+				<th>Funds</th>
 				<th>Operate</th>
 			</tr>
 			<tr>
@@ -23,6 +24,7 @@
 				<th>
 					<input type="text" class="form-control" name="code" value="${ code }">
 				</th>
+				<th></th>
 				<th></th>
 				<th>
 					<button type="button" class="btn btn-primary"
@@ -39,6 +41,11 @@
 					<td>${ stock.getId() }</td>
 					<td>${ stock.getCode() }</td>
 					<td>${ stock.getName() }</td>
+						<td>
+							<c:forEach var="fund" items="${ stock.getFunds() }">
+								<span>${ fund.getName() } </span>
+							</c:forEach>
+						</td>
 					<td>
 						<button type="button" class="btn btn-outline-primary"
 							onclick="location.href='./stock?action=uiEdit&id=' + '${ stock.getId() }'">Edit</button>
@@ -51,7 +58,7 @@
 		<c:if test="${stockList == null}">
 			<tr class="text-center">
 				<td colspan="4">
-					<h3>~查無資料 ~</h3>
+					<h3>~ 查無資料 ~</h3>
 				</td>
 			</tr>
 		</c:if>
