@@ -6,4 +6,5 @@
 		</button>
 		<button type="button" class="btn btn-link">
 			<a href="./fund?action=search">Fund</a>
+		</button>
 	</div>

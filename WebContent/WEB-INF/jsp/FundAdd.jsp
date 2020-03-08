@@ -46,7 +46,7 @@
 		}
 		function doCancel() {
 			if (confirm('是否要取消' + "${ param.action == 'uiAdd' ? '新增' : '更新' }" + '基金?')) {
-				window.location.href = './stock?action=search'
+				window.location.href = './fund?action=search'
 			}
 		}
 	</script>

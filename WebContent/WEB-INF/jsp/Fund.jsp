@@ -82,7 +82,7 @@
 		function doSearch () {
 			var name = document.getElementsByName('name')
 			if (name !== '') {
-				window.location.href = './fund?action=search&code=' + code[0].value
+				window.location.href = './fund?action=search&name=' + name[0].value
 			} else {
 				window.location.href = './fund?action=search'
 			}
