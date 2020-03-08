@@ -65,7 +65,7 @@
 					:props="{
 						key: 'item'
 					}"
-					v-model="chooseStocks">
+					v-model="chooseList">
 				</el-transfer>
 				<input type="hidden" name="stockIds" v-model="getStockIdList()">
 			</div>
@@ -75,13 +75,13 @@
 			template,
 			data: {
 				stockList: [],
-				chooseStocks: []
+				chooseList: []
 			},
 			mounted() {
 				this.getStockList(stocks)
 			},
 			updated() {
-				console.log('choose stocks: ' + this.chooseStocks)
+				console.log('choose stocks: '. this.chooseList)
 			},
 			methods: {
 				getStockList(stocks) {
@@ -99,7 +99,7 @@
 				getStockIdList() {
 					var self = this
 					var stockIds = []
-					self.chooseStocks.forEach(s => {
+					self.chooseList.forEach(s => {
 						stockIds.push(s.split('-')[0])
 					})
 					return stockIds
