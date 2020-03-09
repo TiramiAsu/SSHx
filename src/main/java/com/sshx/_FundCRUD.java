@@ -14,6 +14,7 @@ import java.util.List;
 import com.sshx.dao.FundDAO;
 import com.sshx.dao.StockDAO;
 import com.sshx.entity.Fund;
+import com.sshx.entity.FundNet;
 import com.sshx.entity.Stock;
 import com.sshx.utils.SpringUtils;
 
@@ -41,6 +42,8 @@ public class _FundCRUD {
 //		delete(1L);
 
 //		addStock("高科技", "2330", "3008");
+
+//		addFundNet("高科技", 27);
 
 		query();
 //		find(2L);
@@ -93,7 +96,11 @@ public class _FundCRUD {
 		}
 
 		fundDAO.update(fund.getId(), fund);
-		query();
 	}
 
+	public static void addFundNet(String fundName, Integer value) {
+		Fund fund = fundDAO.find(fundName);
+		fund.setFundNet(new FundNet(value, fund));
+		fundDAO.update(fund.getId(), fund);
+	}
 }

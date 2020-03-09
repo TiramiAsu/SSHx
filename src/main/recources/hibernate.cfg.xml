@@ -57,6 +57,25 @@
 			</many-to-many>
 		</set>
 
+		<!-- one-to-one -->
+		<one-to-one name="fundNet" class="com.sshx.entity.FundNet" cascade="all" />
+
+	</class>
+
+	<!-- 資金淨值 -->
+	<class name="com.sshx.entity.FundNet" table="fundnet">
+
+		<id name="id" column="ID">
+			<generator class="foreign">
+				<param name="property">fund</param>
+			</generator>
+		</id>
+
+		<property name="value" column="value" />
+
+		<!-- one-to-one -->
+		<one-to-one name="fund" class="com.sshx.entity.Fund" constrained="true" />
+
 	</class>
 
 </hibernate-mapping>

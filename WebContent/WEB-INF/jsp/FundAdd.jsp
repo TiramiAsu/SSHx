@@ -30,6 +30,17 @@
 					value="${ param.action == 'uiAdd' ? '' : fund.getDesc() }">
 		</div>
 		<div class="form-group">
+			<label>FundNet</label>
+			<c:if test="${ param.action == 'uiAdd' ? true : false }">
+				<input type="text" class="form-control" name="fundNet" placeholder="FundNet"
+					value="${ param.action == 'uiAdd' ? '' : fund.getFundNet().getValue() }">
+			</c:if>
+			<c:if test="${ param.action == 'uiAdd' ? false : true }">
+				<input type="text" class="form-control" name="fundNet" placeholder="FundNet" disabled
+					value="${ param.action == 'uiAdd' ? '' : fund.getFundNet().getValue() }">
+			</c:if>
+		</div>
+		<div class="form-group">
 			<label>Stocks</label>
 			<div id="vueTransfer"></div>
 		</div>

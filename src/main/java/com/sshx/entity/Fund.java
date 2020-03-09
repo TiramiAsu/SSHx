@@ -24,7 +24,7 @@ public class Fund {
 	private Long id;
 	private String name;
 	private String desc;
-//	private FundNet fundNet;
+	private FundNet fundNet;
 	private Set<Stock> stocks = new HashSet<>();
 //	private Set<Trader> traders;
 	
@@ -38,6 +38,13 @@ public class Fund {
 	public Fund(String name, String desc, Set<Stock> stocks) {
 		this.name = name;
 		this.desc = desc;
+		this.stocks = stocks;
+	}
+
+	public Fund(String name, String desc, FundNet fundNet, Set<Stock> stocks) {
+		this.name = name;
+		this.desc = desc;
+		this.fundNet = fundNet;
 		this.stocks = stocks;
 	}
 
@@ -65,6 +72,14 @@ public class Fund {
 		this.desc = desc;
 	}
 
+	public FundNet getFundNet() {
+		return fundNet;
+	}
+
+	public void setFundNet(FundNet fundNet) {
+		this.fundNet = fundNet;
+	}
+
 	public Set<Stock> getStocks() {
 		return stocks;
 	}
@@ -82,8 +97,8 @@ public class Fund {
 		return "Fund [id=" + id +
 				", name=" + name +
 				", desc=" + desc +
+				", fundNet=" + fundNet +
 				", stocks=" + stocksNames +
 				"]";
 	}
-
 }

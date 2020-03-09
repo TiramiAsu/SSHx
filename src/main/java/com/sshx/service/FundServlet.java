@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sshx.dao.FundDAO;
 import com.sshx.dao.StockDAO;
 import com.sshx.entity.Fund;
+import com.sshx.entity.FundNet;
 import com.sshx.entity.Stock;
 import com.sshx.utils.SpringUtils;
 
@@ -121,10 +122,13 @@ public class FundServlet extends HttpServlet {
 		try {
 			String name = req.getParameter("name");
 			String desc = req.getParameter("desc");
+			Integer fundNetValue = Integer.parseInt(req.getParameter("fundNet"));
 			String[] stockIds = req.getParameter("stockIds").split(","); // 3008,1301
 
-			if (isNotNullOrEmptyString(name, desc)) {
+			if (isNotNullOrEmptyString(name, desc, fundNetValue)) {
 				Fund fund = new Fund(name, desc, getStocks(stockIds));
+				FundNet fundNet = new FundNet(fundNetValue, fund);
+				fund.setFundNet(fundNet);
 				fundDAO.create(fund);
 				req.setAttribute("msg", "\"" + fund.getName() + "\" add Success!!");
 			} else {
@@ -155,7 +159,6 @@ public class FundServlet extends HttpServlet {
 						// 所有 Stock 移除, 清空 Set<Stock> 資料
 						fund.setStocks(new HashSet<>());
 					}
-					System.out.println(fund);
 					fundDAO.update(id, fund);
 					req.setAttribute("msg", "\"" + fund.getName() + "\" edit Success!!");
 				} else {
