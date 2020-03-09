@@ -142,14 +142,20 @@ public class FundServlet extends HttpServlet {
 			Long id = Long.parseLong(req.getParameter("id")); // 取得 hidden 中設定的 id 值
 			String name = req.getParameter("name");
 			String desc = req.getParameter("desc");
-			String[] stockIds = req.getParameter("stockIds").split(","); // 3008,1301
+			String stockIds = req.getParameter("stockIds"); // 3008,1301
 
 			if (isNotNullOrEmptyString(id, name)) {
 				Fund fund = fundDAO.find(id, Fund.class);
 				if (isNotNull(fund)) {
 					fund.setName(name);
 					fund.setDesc(desc);
-					fund.setStocks(getStocks(stockIds));
+					if (!stockIds.isEmpty()) {
+						fund.setStocks(getStocks(stockIds.split(",")));
+					} else {
+						// 所有 Stock 移除, 清空 Set<Stock> 資料
+						fund.setStocks(new HashSet<>());
+					}
+					System.out.println(fund);
 					fundDAO.update(id, fund);
 					req.setAttribute("msg", "\"" + fund.getName() + "\" edit Success!!");
 				} else {
