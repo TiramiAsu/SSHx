@@ -55,6 +55,7 @@
 	<script type="text/javascript" src="https://unpkg.com/element-ui@2.4.0/lib/umd/locale/zh-TW.js"></script>
 	<script>
 		var stocks = '${ stockList }'
+		var choose = '${ chooseList }'
 		var template = `
 			<div>
 				<el-transfer
@@ -78,22 +79,26 @@
 				chooseList: []
 			},
 			mounted() {
-				this.getStockList(stocks)
+				this.initList(stocks, choose)
 			},
 			updated() {
-				console.log('choose stocks: '. this.chooseList)
+				console.log('choose stocks: ', this.chooseList)
 			},
 			methods: {
-				getStockList(stocks) {
-					// console.log('get it: ' + stocks)                  // {3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電}
-					var data = stocks.substring(1, stocks.length - 1) // 3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電             -> 去除 '{', '}'
-					var arr = data.split(', ')                        // ["3008=大立光", "1301=台塑", "1201=味全", "2454=聯發科", "2330=台積電"] -> 切分成陣列
-					arr.forEach(s => {
+				initList(stocks, choose) {
+					var leftArray = this.map2Array(stocks)
+					leftArray.forEach(s => {
 						this.stockList.push({
 							key: s.split('=')[0],
 							value: s.split('=')[1],
 							item: s.split('=')[0] + '-' + s.split('=')[1]
 						})
+					})
+					var rightString = this.map2Array(choose)
+					rightString.forEach(s => {
+						if (s) {
+							this.chooseList.push(s.split('=')[0] + '-' + s.split('=')[1])
+						}
 					})
 				},
 				getStockIdList() {
@@ -103,6 +108,12 @@
 						stockIds.push(s.split('-')[0])
 					})
 					return stockIds
+				},
+				map2Array(str) {
+					// console.log('str: ' + str)               // {3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電}
+					var data = str.substring(1, str.length - 1) // 3008=大立光, 1301=台塑, 1201=味全, 2454=聯發科, 2330=台積電             -> 去除 '{', '}'
+					var arr = data.split(', ')                  // ["3008=大立光", "1301=台塑", "1201=味全", "2454=聯發科", "2330=台積電"] -> 切分成陣列
+					return arr
 				}
 			}
 		})

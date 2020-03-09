@@ -103,6 +103,10 @@ public class FundServlet extends HttpServlet {
 						stockDAO.query(Stock.class)
 							.stream()
 							.collect(Collectors.toMap(Stock::getCode, Stock::getName)));
+				req.setAttribute("chooseList",
+						fund.getStocks()
+							.stream()
+							.collect(Collectors.toMap(Stock::getCode, Stock::getName)));
 			} else {
 				throw new Exception(">>> id is Null <<<");
 			}
