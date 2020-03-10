@@ -59,6 +59,12 @@
 
 		<!-- one-to-one -->
 		<one-to-one name="fundNet" class="com.sshx.entity.FundNet" cascade="all" />
+		
+		<!-- one-to-mamy -->
+		<set name="traders" table="trader" cascade="save-update" lazy="false" inverse="false">
+			<key column="fund_id"/>
+			<one-to-many class="com.sshx.entity.Trader"/>
+		</set>
 
 	</class>
 
@@ -75,6 +81,22 @@
 
 		<!-- one-to-one -->
 		<one-to-one name="fund" class="com.sshx.entity.Fund" constrained="true" />
+
+	</class>
+
+	<!-- 基金經理人(操盤手) -->
+	<class name="com.sshx.entity.Trader" table="trader">
+
+		<id name="id" column="ID">
+			<generator class="identity"/>
+		</id>
+		
+		<property name="name" column="NAME" length="127" not-null="true" />
+		
+		<!-- many-to-one -->
+		<many-to-one name="fund" class="com.sshx.entity.Fund"
+			cascade="save-update" column="fund_id" outer-join="true"/>
+		<!-- 設定 outer-join 為 true, Hibernate 會一次查詢所有的資料(trader 與 fund) -->
 
 	</class>
 
