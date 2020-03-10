@@ -93,6 +93,8 @@ public class TraderServlet extends HttpServlet {
 			if (isNotNull(id)) {
 				Trader trader = traderDAO.find(id, Trader.class);
 				req.setAttribute("trader", trader);
+				req.setAttribute("fundName", trader.getFund().getName());
+				req.setAttribute("fundList", fundDAO.query(Fund.class));
 			} else {
 				throw new Exception(">>> id is Null <<<");
 			}
@@ -128,11 +130,14 @@ public class TraderServlet extends HttpServlet {
 		try {
 			Long id = Long.parseLong(req.getParameter("id")); // 取得 hidden 中設定的 id 值
 			String name = req.getParameter("name");
+			String fundName = req.getParameter("fundName");
 
-			if (isNotNullOrEmptyString(id, name)) {
+			if (isNotNullOrEmptyString(id, name, fundName)) {
+				Fund fund = fundDAO.find(fundName);
 				Trader trader = traderDAO.find(id, Trader.class);
-				if (isNotNull(trader)) {
+				if (isNotNull(trader, fund)) {
 					trader.setName(name);
+					trader.setFund(fund);
 					traderDAO.update(id, trader);
 					req.setAttribute("msg", "\"" + trader.getName() + "\" edit Success!!");
 				} else {

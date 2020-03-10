@@ -29,7 +29,14 @@
 			<select class="custom-select" name="fundName" required>
 				<option value="">請選擇基金</option>
 				<c:forEach var="fund" items="${ fundList }">
+					<c:if test="${ param.action == 'uiAdd' ? true : false }">
 						<option value="${ fund.getName() }">${ fund.getName() }</option>
+					</c:if>
+					<c:if test="${ param.action == 'uiAdd' ? false : true }">
+						<option value="${ fund.getName() }" ${ (fundName == fund.getName()) ? 'selected' : '' }>
+							${ fund.getName() }
+						</option>
+					</c:if>
 				</c:forEach>
 			</select>
 			<div class="invalid-feedback">未選擇基金</div>
