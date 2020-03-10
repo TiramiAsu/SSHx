@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
+
+	<jsp:include page="./include/head.jsp"></jsp:include>
 	<title>Fund ${ param.action == 'uiAdd' ? 'Add' : 'Edit' }</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
 </head>
 <body style="padding: 20px 10%">
+	<jsp:include page="./include/menu.jsp"></jsp:include>
 	<h1>fund</h1>
 	<h3 style="color: darkgray">[Info] ${ param.action == 'uiAdd' ? 'Add' : 'Edit' } Fund...</h3>
 	<form method="post" action="./fund">
@@ -129,5 +126,6 @@
 			}
 		})
 	</script>
+	<jsp:include page="./include/foot.jsp"></jsp:include>
 </body>
 </html>
