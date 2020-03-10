@@ -7,4 +7,7 @@
 		<button type="button" class="btn btn-link">
 			<a href="./fund?action=search">Fund</a>
 		</button>
+		<button type="button" class="btn btn-link">
+			<a href="./trader?action=search">Trader</a>
+		</button>
 	</div>
