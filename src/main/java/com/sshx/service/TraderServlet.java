@@ -83,6 +83,7 @@ public class TraderServlet extends HttpServlet {
 	}
 
 	public void uiAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("fundList", fundDAO.query(Fund.class));
 		req.getRequestDispatcher("./WEB-INF/jsp/TraderAdd.jsp").forward(req, resp);
 	}
 
@@ -105,9 +106,12 @@ public class TraderServlet extends HttpServlet {
 	public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String name = req.getParameter("name");
+			String fundName = req.getParameter("fundName");
 
-			if (isNotNullOrEmptyString(name)) {
+			if (isNotNullOrEmptyString(name, fundName)) {
+				Fund fund = fundDAO.find(fundName);
 				Trader trader = new Trader(name);
+				trader.setFund(fund);
 				traderDAO.create(trader);
 				req.setAttribute("msg", "\"" + trader.getName() + "\" add Success!!");
 			} else {
