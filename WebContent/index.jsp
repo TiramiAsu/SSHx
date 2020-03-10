@@ -9,15 +9,21 @@
 <body style="padding: 20px 10%">
 	<div class="card">
 		<div class="card-header">
-			<h2>SSHx Project</h2>
+			<div class="container row">
+				<div class="col-sm" style="padding-left: 5%">
+					<h3 nowrap>SSHx Project</h3>
+				</div>
+				<div class="col-sm">
+					<div align="right">
+						<a href="./stock?action=search" class="btn btn-primary">Go Project!!</a>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="card-body">
 			<h5 class="card-title">Framework: JSP + Servlet + Spring + Hibernate + PostgreSQL</h5>
 			<div style="padding: 20px 0px" align="center">
-				<img src="/SSHx/imgs/tables.png" />
-			</div>
-			<div align="right">
-				<a href="./stock?action=search" class="btn btn-primary">Go Project!!</a>
+				<img src="/SSHx/imgs/tables.png" width="65%"/>
 			</div>
 		</div>
 	</div>
