@@ -19,7 +19,7 @@
 			<tr>
 				<th></th>
 				<th>
-					<input type="text" class="form-control" name="Name" value="${ name }">
+					<input type="text" class="form-control" name="name" value="${ name }">
 				</th>
 				<th></th>
 				<th>

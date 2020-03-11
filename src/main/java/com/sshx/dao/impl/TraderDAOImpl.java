@@ -32,7 +32,7 @@ public class TraderDAOImpl extends GenericDAOImpl<Trader> implements TraderDAO {
 	@Override
 	@Transactional
 	public Trader find(String name) {
-		String hql = "FROM trader WHERE name = :name";
+		String hql = "FROM Trader WHERE name = :name";
 		Query<Trader> query = getSessionFactory().getCurrentSession().createQuery(hql, Trader.class);
 		query.setParameter("name", name).setMaxResults(1);
 		List<Trader> list = query.list();
