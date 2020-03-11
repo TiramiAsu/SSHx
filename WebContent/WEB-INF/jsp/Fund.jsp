@@ -17,6 +17,7 @@
 				<th>Fund Net</th>
 				<th>Stocks</th>
 				<th>Traders</th>
+				<th>Investors</th>
 				<th>Operate</th>
 			</tr>
 			<tr>
@@ -24,6 +25,7 @@
 				<th>
 					<input type="text" class="form-control" name="name" value="${ name }">
 				</th>
+				<th></th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -52,6 +54,11 @@
 						<td>
 							<c:forEach var="trader" items="${ fund.getTraders() }">
 								<span>${ trader.getName() } </span>
+							</c:forEach>
+						</td>
+						<td>
+							<c:forEach var="investor" items="${ fund.getInvestors() }">
+								<span>${ investor.getName() } </span>
 							</c:forEach>
 						</td>
 						<td>
